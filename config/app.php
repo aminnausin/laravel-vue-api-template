@@ -53,6 +53,9 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
+    'host' => env('APP_HOST', 'app.test'),
+    'scheme' => env('APP_SCHEME', 'http'),
+    'port' => env('APP_PORT', 8080),
 
     /*
     |--------------------------------------------------------------------------
@@ -65,7 +68,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => env('APP_TIMEZONE', 'UTC'),
 
     /*
     |--------------------------------------------------------------------------
@@ -123,4 +126,13 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'login_message' => env('LOGIN_MESSAGE', 'Enter your email and password below to log in'),
+
+    'trusted_hosts' => [
+        '^localhost(:[0-9]+)?$',
+        '^127\.0\.0\.1(:[0-9]+)?$',
+        '^app\.test(:[0-9]+)?$',
+        env('APP_HOST', 'app.test'),
+        ...explode(',', env('SANCTUM_STATEFUL_DOMAINS', '192.168.1.1,127.0.0.1')),
+    ],
 ];

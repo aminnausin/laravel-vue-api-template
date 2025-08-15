@@ -1,0 +1,10 @@
+{
+    "version": "0.1.0",
+    "commit": "7c53bd8",
+    "php_version": "8.3.10",
+    "laravel_version": "12.20.0",
+    "os": "Windows NT build 19045 (Windows 10)",
+    "cpu_arch": "AMD64",
+    "cpu_cores": "20",
+    "login_message": "Enter your email and password below to log in"
+}
