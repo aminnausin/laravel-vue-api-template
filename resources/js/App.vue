@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { ToastPostion } from '@/types/cedar';
+import type { ToastPostion } from '@aminnausin/cedar-ui';
 
-import { onMounted, onUnmounted, ref, watch } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 import { RouterView } from 'vue-router';
 
 import { getScreenSize } from '@/lib/utils';
@@ -9,9 +9,9 @@ import { useAuthStore } from '@/stores/AuthStore';
 // import { storeToRefs } from 'pinia';
 // import { useAppStore } from '@/stores/AppStore';
 
-import ToastController from '@/components/cedar/ToastController.vue';
-// import ContextMenu from '@/components/cedar/ContextMenu.vue';
-// import GlobalModal from '@/components/modals/GlobalModal.vue';
+import { ToastController } from '@/components/cedar-ui/toast';
+import { ContextMenu } from '@/components/cedar-ui/context-menu';
+import { GlobalModal } from '@/components/cedar-ui/modal';
 
 const toastPosition = ref<ToastPostion>();
 
@@ -45,7 +45,7 @@ onUnmounted(() => {
 <template>
     <ToastController v-if="toastPosition" :position="toastPosition" />
     <RouterView />
-    <!-- <GlobalModal /> -->
+    <GlobalModal />
     <!-- <ContextMenu
         ref="contextMenu"
         :items="contextMenuItems"

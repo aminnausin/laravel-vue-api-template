@@ -1,4 +1,8 @@
 import type { RouteMeta } from '@/global';
+import { toTitleCase } from '@/lib/utils';
+import { logout } from '@/service/authAPI';
+import { useAuthStore } from '@/stores/AuthStore';
+import { toast } from '@aminnausin/cedar-ui';
 import nProgress from 'nprogress';
 import { createRouter, createWebHistory } from 'vue-router';
 
@@ -10,6 +14,64 @@ export const router = createRouter({
             name: 'root',
             component: () => import('@/pages/Root.vue'),
         },
+        {
+            path: '/login',
+            name: 'login',
+            component: () => import('@/pages/Login.vue'),
+            meta: { guestOnly: true },
+        },
+        {
+            path: '/recovery',
+            name: 'recovery',
+            component: () => import('@/pages/Recovery.vue'),
+            meta: { guestOnly: true },
+        },
+        {
+            path: '/register',
+            name: 'register',
+            component: () => import('@/pages/Register.vue'),
+            meta: { guestOnly: true },
+        },
+        {
+            path: '/reset-password/:token',
+            name: 'reset-password',
+            component: () => import('@/pages/ResetPassword.vue'),
+            meta: { guestOnly: true },
+        },
+        {
+            path: '/logout',
+            name: 'logout',
+            beforeEnter: async (to, from, next) => {
+                const authStore = useAuthStore();
+                const meta = from.meta as { title?: string; protected?: boolean };
+
+                let nextPath = from.fullPath;
+                let nextTitle = meta?.title ?? toTitleCase(`${from.name?.toString()}`);
+                try {
+                    if (authStore.userData) {
+                        await logout(); // call API only if session is thought to be valid
+                    }
+                } catch (error: any) {
+                    if (error?.response?.status !== 419 && error?.response?.status !== 401) {
+                        toast.error(`Unable to logout.`);
+                        console.error(error);
+                    }
+                }
+                authStore.clearAuthState();
+
+                if (meta?.protected || from.name === 'logout') {
+                    nextPath = '/';
+                    nextTitle = 'Home';
+                }
+
+                document.title = nextTitle;
+                next(nextPath);
+            },
+            component: {
+                render: () => 'div',
+            },
+        },
+
         {
             path: '/dashboard',
             name: 'dashboard',

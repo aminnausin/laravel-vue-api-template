@@ -1,5 +1,14 @@
-<script lang="ts">
-import ChipTag from '@aminnausin/cedar-ui';
+<script setup lang="ts">
+import type { BreadcrumbItem } from '@/types';
+import AppLayout from '@/layouts/AppLayout.vue';
+const breadcrumbs: BreadcrumbItem[] = [
+    {
+        title: 'Home',
+        href: '/',
+    },
+];
 </script>
 
-<template>Root<ChipTag>T</ChipTag></template>
+<template>
+    <AppLayout :breadcrumbs="breadcrumbs"> Laravel Vue-API Template </AppLayout>
+</template>
