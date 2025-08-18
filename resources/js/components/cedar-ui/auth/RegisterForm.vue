@@ -4,6 +4,7 @@ import type { FormField } from '@aminnausin/cedar-ui';
 import { BaseForm, FormInput, FormItem, FormErrorList, FormInputLabel } from '../form';
 import { useRouter, RouterLink } from 'vue-router';
 import { ButtonForm } from '../button';
+import { register } from '@/service/authAPI';
 import { useForm } from '@aminnausin/cedar-ui';
 import { ref } from 'vue';
 
@@ -35,7 +36,7 @@ const form = useForm({
 const handleRegister = async () => {
     form.submit(
         async (fields) => {
-            // return await register(fields); -> Replace with your register function
+            return await register(fields);
         },
         {
             onSuccess: (response) => {
@@ -58,9 +59,9 @@ const handleRegister = async () => {
             <FormInput v-model="form.fields[field.name]" :field="field" class="!mt-0" />
             <FormErrorList :errors="form.errors" :field-name="field.name" />
         </FormItem>
-        <div class="flex flex-wrap gap-2 gap-x-4 items-center justify-end text-center">
+        <div class="flex flex-wrap items-center justify-end gap-2 gap-x-4 text-center">
             <RouterLink
-                class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 dark:focus:ring-offset-gray-800"
+                class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:outline-none dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
                 to="/login"
             >
                 Already registered?

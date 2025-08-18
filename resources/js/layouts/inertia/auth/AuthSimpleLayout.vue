@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AppLogoIcon from '@/components/inertia/AppLogoIcon.vue';
+import AppLogoIcon from '@/components/app/AppLogoIcon.vue';
 
 defineProps<{
     title?: string;

@@ -3,13 +3,12 @@ import type { FormField } from '@aminnausin/cedar-ui';
 
 import { BaseForm, FormInput, FormItem, FormErrorList, FormInputLabel } from '../form';
 import { toast, useForm } from '@aminnausin/cedar-ui';
+import { recoverAccount } from '@/service/authAPI';
 import { RouterLink } from 'vue-router';
 import { ButtonForm } from '../button';
 import { ref } from 'vue';
 
-const fields = ref<FormField[]>([
-    { name: 'email', text: 'Email', type: 'text', required: true, autocomplete: 'email', placeholder: 'email@example.ca' },
-]);
+const fields = ref<FormField[]>([{ name: 'email', text: 'Email', type: 'text', required: true, autocomplete: 'email', placeholder: 'email@example.ca' }]);
 
 const form = useForm<{ email: string }>({
     email: '',
@@ -18,7 +17,7 @@ const form = useForm<{ email: string }>({
 const handleSubmit = async () => {
     form.submit(
         async (fields) => {
-            // return recoverAccount(fields); -> Replace with your recovery function
+            return recoverAccount(fields);
         },
         {
             onSuccess: (response) => {
@@ -40,19 +39,12 @@ const handleSubmit = async () => {
             <FormErrorList :errors="form.errors" :field-name="field.name" />
         </FormItem>
 
-        <ButtonForm
-            variant="auth"
-            type="button"
-            @click="handleSubmit"
-            :disabled="form.processing"
-            class="!justify-center !capitalize w-full"
-            >Email password reset link</ButtonForm
-        >
+        <ButtonForm variant="auth" type="button" @click="handleSubmit" :disabled="form.processing" class="w-full !justify-center !capitalize">Email password reset link</ButtonForm>
     </BaseForm>
     <span class="mx-auto text-gray-600 dark:text-gray-400">
         Or, return to
         <RouterLink
-            class="underline hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 dark:focus:ring-offset-gray-800"
+            class="rounded-md underline hover:text-gray-900 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:outline-none dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
             to="/login"
         >
             log in

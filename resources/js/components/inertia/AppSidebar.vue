@@ -7,7 +7,7 @@ import { Folder, LayoutGrid } from 'lucide-vue-next';
 import NavFooter from '@/components/inertia/NavFooter.vue';
 import NavMain from '@/components/inertia/NavMain.vue';
 import NavUser from '@/components/inertia/NavUser.vue';
-import AppLogo from './AppLogo.vue';
+import AppLogo from '../app/AppLogo.vue';
 
 const mainNavItems: NavItem[] = [
     {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import AppLogo from '@/components/inertia/AppLogo.vue';
-import AppLogoIcon from '@/components/inertia/AppLogoIcon.vue';
+import AppLogo from '@/components/app/AppLogo.vue';
+import AppLogoIcon from '@/components/app/AppLogoIcon.vue';
 import Breadcrumbs from '@/components/inertia/Breadcrumbs.vue';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
