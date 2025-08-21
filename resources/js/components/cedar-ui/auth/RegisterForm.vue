@@ -3,12 +3,14 @@ import type { FormField } from '@aminnausin/cedar-ui';
 
 import { BaseForm, FormInput, FormItem, FormErrorList, FormInputLabel } from '../form';
 import { useRouter, RouterLink } from 'vue-router';
+import { useAuthStore } from '@/stores/AuthStore';
+import { storeToRefs } from 'pinia';
 import { ButtonForm } from '../button';
 import { register } from '@/service/authAPI';
 import { useForm } from '@aminnausin/cedar-ui';
 import { ref } from 'vue';
 
-const userData = ref({}); // Replace with your auth store and user data object
+const { userData } = storeToRefs(useAuthStore());
 
 const router = useRouter();
 

@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import type { BreadcrumbItem } from '@/types';
 
+import { toast } from '@aminnausin/cedar-ui';
+
 import PlaceholderPattern from '@/components/inertia/PlaceholderPattern.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
-import { toast } from '@/service/toaster/toastService';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
