@@ -23,6 +23,21 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::put('/password', [PasswordController::class, 'update'])->name('password.update');
         Route::put('/email', [EmailController::class, 'update'])->name('email.update');
     });
+
+    /**
+     * Inertia template routes
+     *
+     * Route::get('verify-email', EmailVerificationPromptController::class)
+     *     ->name('verification.notice');
+     *
+     * Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
+     *     ->middleware(['signed', 'throttle:6,1'])
+     *     ->name('verification.verify');
+     *
+     * Route::post('email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
+     *     ->middleware('throttle:6,1')
+     *     ->name('verification.send');
+     */
 });
 
 // Auth
@@ -34,3 +49,7 @@ Route::post('/reset-password/{token}', [PasswordController::class, 'store'])->na
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
+
+
+// The way the Inertia template does it is separate each group into a file so like settings.php for all the /settings/ routes
+// And then include them with a require __DIR__ . '/settings.php'; into the root file so web.php for inertia or api.php for me
